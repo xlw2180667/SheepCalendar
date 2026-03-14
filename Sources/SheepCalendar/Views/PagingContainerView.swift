@@ -8,6 +8,7 @@ struct PagingContainerView: View {
     @Binding var selection: SheepSelection
     let calendar: Calendar
 
+    @Environment(\.sheepTheme) private var theme
     @State private var currentPage: Int = 1
 
     private var months: [Date] {
@@ -31,7 +32,7 @@ struct PagingContainerView: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .frame(minHeight: 260)
+        .frame(height: 6 * theme.dayCellHeight + 5 * theme.rowSpacing)
         .onChange(of: currentPage) { newPage in
             guard newPage != 1 else { return }
             let delta = newPage - 1
